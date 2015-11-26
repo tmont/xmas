@@ -250,11 +250,11 @@ const gigi = new Person('Gigi');
 const tommy = new Person('Tommy');
 const previousGivings = new Map();
 previousGivings.set(2013, new GivingSet()
-		.set(bob, gigi)
-		.set(joe, rebecca)
-		.set(rebecca, joe)
-		.set(gigi, tommy)
-		.set(tommy, bob)
+	.set(bob, gigi)
+	.set(joe, rebecca)
+	.set(rebecca, joe)
+	.set(gigi, tommy)
+	.set(tommy, bob)
 );
 previousGivings.set(2014, new GivingSet()
 	.set(bob, joe)
@@ -293,5 +293,3 @@ if (matches.length) {
 } else {
 	console.log(chalk.red('No matches found :('));
 }
-
-
