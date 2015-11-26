@@ -61,7 +61,7 @@ There are several rules:
 4. A "maximum matches (1)" rule that ensures that at most one person is giving to
    the same person they gave to two years ago
    
-Only the calling code is hardcoded to my family; the "framework" can be handle an
+Only the calling code is hardcoded to my family; the "framework" can handle an
 arbitrary number of people. Plus it's easy to write your own rules!
 
 ### PHP?
