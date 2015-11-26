@@ -7,12 +7,6 @@ class Person {
 	}
 }
 
-const bob = new Person('Bob');
-const joe = new Person('Joe');
-const rebecca = new Person('Rebecca');
-const gigi = new Person('Gigi');
-const tommy = new Person('Tommy');
-
 class GivingSet {
 	constructor(people) {
 		this.givings = new Map();
@@ -249,6 +243,11 @@ class CannotGiveToSelfRule extends GivingRule {
 	}
 }
 
+const bob = new Person('Bob');
+const joe = new Person('Joe');
+const rebecca = new Person('Rebecca');
+const gigi = new Person('Gigi');
+const tommy = new Person('Tommy');
 const previousGivings = new Map();
 previousGivings.set(2013, new GivingSet()
 		.set(bob, gigi)
