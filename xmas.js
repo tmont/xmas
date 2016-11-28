@@ -263,6 +263,13 @@ previousGivings.set(2014, new GivingSet()
 	.set(gigi, rebecca)
 	.set(tommy, gigi)
 );
+previousGivings.set(2015, new GivingSet()
+	.set(bob, tommy)
+	.set(joe, rebecca)
+	.set(rebecca, gigi)
+	.set(gigi, bob)
+	.set(tommy, joe)
+);
 
 const rules = [
 	new CannotGiveToSelfRule(),
@@ -273,8 +280,8 @@ const rules = [
 		[gigi, joe]
 	])),
 	new UniqueReceiverRule(),
-	new MaxMatchesRule(previousGivings.get(2014), 0),
-	new MaxMatchesRule(previousGivings.get(2013), 1)
+	new MaxMatchesRule(previousGivings.get(2015), 0),
+	new MaxMatchesRule(previousGivings.get(2014), 1)
 ];
 
 const people = [bob, joe, rebecca, gigi, tommy];
@@ -283,12 +290,13 @@ const matches = [];
 GivingSet.generate(people, rules, newGivingSet, matches);
 console.log(previousGivings.get(2013).toStringWithHeader('2013'));
 console.log(previousGivings.get(2014).toStringWithHeader('2014'));
+console.log(previousGivings.get(2015).toStringWithHeader('2015'));
 
 console.log();
 if (matches.length) {
 	matches.forEach((givingSet, i) => {
 		console.log('Match #' + (i + 1));
-		console.log(givingSet.toStringWithHeader('2015'));
+		console.log(givingSet.toStringWithHeader('2016'));
 	});
 } else {
 	console.log(chalk.red('No matches found :('));
