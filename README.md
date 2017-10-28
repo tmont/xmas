@@ -12,7 +12,7 @@ First run `npm install`, and then do this:
 $ npm start
   
 > xmas@2.0.0 start /home/tmont/code/xmas
-> node --use_strict --harmony_destructuring --harmony xmas.js
+> ./xmas.js
 
 +----------------------+
 | 2013                 |

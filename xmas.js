@@ -1,5 +1,7 @@
-var chalk = require('chalk'),
-	debug = false;
+#!/usr/bin/env node
+
+const chalk = require('chalk');
+const debug = false;
 
 class Person {
 	constructor(name) {
@@ -43,7 +45,7 @@ class GivingSet {
 	}
 
 	clone() {
-		var cloned = new GivingSet();
+		const cloned = new GivingSet();
 		for (let [ giver, receiver ] of this.givings) {
 			cloned.set(giver, receiver);
 		}
@@ -108,6 +110,7 @@ class GivingSet {
 	}
 
 	toStringWithHeader(header) {
+		header = String(header || '');
 		const delimiter = ' gives to ';
 		const padding = ' ';
 		const colChar = '|';
@@ -210,8 +213,8 @@ class UniqueReceiverRule extends GivingRule {
 	}
 
 	isValid(giving) {
-		let receivers = [];
-		for (let [ giver, receiver ] of giving.givings) {
+		const receivers = [];
+		for (const [ giver, receiver ] of giving.givings) {
 			if (!receiver) {
 				continue;
 			}
@@ -270,6 +273,23 @@ previousGivings.set(2015, new GivingSet()
 	.set(gigi, bob)
 	.set(tommy, joe)
 );
+previousGivings.set(2016, new GivingSet()
+	.set(bob, gigi)
+	.set(joe, bob)
+	.set(rebecca, joe)
+	.set(gigi, tommy)
+	.set(tommy, rebecca)
+);
+
+/*
+Bob gives to Gigi      |
+| Joe gives to Bob       |
+| Rebecca gives to Joe   |
+| Gigi gives to Tommy    |
+| Tommy gives to Rebecca
+ */
+
+const currentYear = 2017;
 
 const rules = [
 	new CannotGiveToSelfRule(),
@@ -280,23 +300,22 @@ const rules = [
 		[gigi, joe]
 	])),
 	new UniqueReceiverRule(),
-	new MaxMatchesRule(previousGivings.get(2015), 0),
-	new MaxMatchesRule(previousGivings.get(2014), 1)
+	new MaxMatchesRule(previousGivings.get(currentYear - 1), 0),
+	new MaxMatchesRule(previousGivings.get(currentYear - 2), 1)
 ];
 
 const people = [bob, joe, rebecca, gigi, tommy];
 const newGivingSet = new GivingSet(people);
 const matches = [];
 GivingSet.generate(people, rules, newGivingSet, matches);
-console.log(previousGivings.get(2013).toStringWithHeader('2013'));
-console.log(previousGivings.get(2014).toStringWithHeader('2014'));
-console.log(previousGivings.get(2015).toStringWithHeader('2015'));
+console.log(previousGivings.get(currentYear - 2).toStringWithHeader(currentYear - 2));
+console.log(previousGivings.get(currentYear - 1).toStringWithHeader(currentYear - 1));
 
 console.log();
 if (matches.length) {
 	matches.forEach((givingSet, i) => {
 		console.log('Match #' + (i + 1));
-		console.log(givingSet.toStringWithHeader('2016'));
+		console.log(givingSet.toStringWithHeader(currentYear));
 	});
 } else {
 	console.log(chalk.red('No matches found :('));

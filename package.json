@@ -1,15 +1,16 @@
 {
 	"name": "xmas",
 	"version": "2.0.0",
+	"private": true,
 	"main": "xmas.js",
 	"scripts": {
-		"start": "node --use_strict --harmony_destructuring --harmony xmas.js"
+		"start": "node ./xmas.js"
 	},
 	"files": [
 		"xmas.js"
 	],
 	"engines": {
-		"node": ">= 4.2.2"
+		"node": ">= 8.0.0"
 	},
 	"dependencies": {
 		"chalk": "1.1.1"
