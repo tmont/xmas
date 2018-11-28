@@ -13,6 +13,6 @@
 		"node": ">= 8.0.0"
 	},
 	"dependencies": {
-		"chalk": "1.1.1"
+		"lliw": "1.0.0"
 	}
 }

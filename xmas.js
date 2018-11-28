@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const chalk = require('chalk');
+const lliw = require('lliw');
 const debug = false;
 
 class Person {
@@ -67,11 +67,11 @@ class GivingSet {
 				continue;
 			}
 
-			log('trying to assign a receiver to ' + chalk.blue(giver.name));
+			log('trying to assign a receiver to ' + lliw.blue(giver.name));
 			//go through each receiver, and try to set them up with the giver
 			for (let i = 0; i < people.length; i++) {
 				let person = people[i];
-				log('making ' + chalk.blue(giver.name) + ' give to ' + chalk.yellow(person.name));
+				log('making ' + lliw.blue(giver.name) + ' give to ' + lliw.yellow(person.name));
 				giving.set(giver, person);
 
 				//validate ruleset
@@ -88,14 +88,14 @@ class GivingSet {
 				if (isValid) {
 					if (GivingSet.generate(people, rules, giving, matches, depth + 1)) {
 						//it worked!
-						log(chalk.green('found a match!'));
+						log(lliw.green('found a match!'));
 						matches.push(giving.clone());
 					}
 
 					giving.set(giver, null);
 				} else {
 					//this guy is not great, go on the next one
-					log('> that didn\'t work because ' + chalk.red(invalidRule.name) + ' failed');
+					log('> that didn\'t work because ' + lliw.red(invalidRule.name) + ' failed');
 					giving.set(giver, null);
 				}
 			}
@@ -134,7 +134,7 @@ class GivingSet {
 			lines.push(fullRow);
 			lines.push(
 				colChar + padding +
-				chalk.green(header) +
+				lliw.green(header) +
 				padding.repeat(longestNameLength - header.length + 1) + colChar
 			);
 		}
@@ -144,7 +144,7 @@ class GivingSet {
 			const dataPadding = longestNameLength - (giver.name.length + receiver.name.length + delimiter.length);
 			lines.push(
 				colChar + padding +
-				chalk.blue(giver.name) + delimiter + chalk.yellow(receiver.name) +
+				lliw.blue(giver.name) + delimiter + lliw.yellow(receiver.name) +
 				padding.repeat(dataPadding + 1) + colChar
 			);
 		}
@@ -280,16 +280,15 @@ previousGivings.set(2016, new GivingSet()
 	.set(gigi, tommy)
 	.set(tommy, rebecca)
 );
+previousGivings.set(2017, new GivingSet()
+	.set(bob, joe)
+	.set(joe, tommy)
+	.set(rebecca, gigi)
+	.set(gigi, rebecca)
+	.set(tommy, bob)
+);
 
-/*
-Bob gives to Gigi      |
-| Joe gives to Bob       |
-| Rebecca gives to Joe   |
-| Gigi gives to Tommy    |
-| Tommy gives to Rebecca
- */
-
-const currentYear = 2017;
+const currentYear = 2018;
 
 const rules = [
 	new CannotGiveToSelfRule(),
@@ -308,6 +307,7 @@ const people = [bob, joe, rebecca, gigi, tommy];
 const newGivingSet = new GivingSet(people);
 const matches = [];
 GivingSet.generate(people, rules, newGivingSet, matches);
+console.log(previousGivings.get(currentYear - 3).toStringWithHeader(currentYear - 3));
 console.log(previousGivings.get(currentYear - 2).toStringWithHeader(currentYear - 2));
 console.log(previousGivings.get(currentYear - 1).toStringWithHeader(currentYear - 1));
 
@@ -318,5 +318,5 @@ if (matches.length) {
 		console.log(givingSet.toStringWithHeader(currentYear));
 	});
 } else {
-	console.log(chalk.red('No matches found :('));
+	console.log(lliw.red('No matches found :('));
 }
