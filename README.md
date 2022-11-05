@@ -58,7 +58,7 @@ There are several rules:
 3. An "identity" rule that prevents somebody from giving a gift to themselves
 4. A "maximum matches (0)" rule that ensures that at most zero people are giving to
    the same people they gave to the previous year
-4. A "maximum matches (1)" rule that ensures that at most one person is giving to
+5. A "maximum matches (1)" rule that ensures that at most one person is giving to
    the same person they gave to two years ago
    
 Only the calling code is hardcoded to my family; the "framework" can handle an
