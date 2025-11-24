@@ -336,8 +336,15 @@ previousGivings.set(2024, new GivingSet()
 	.set(gigi, tommy)
 	.set(tommy, rebecca)
 );
+previousGivings.set(2025, new GivingSet()
+	.set(bob, joe)
+	.set(joe, tommy)
+	.set(rebecca, gigi)
+	.set(gigi, rebecca)
+	.set(tommy, bob)
+);
 
-const currentYear = 2024;
+const currentYear = 2025;
 
 const rules = [
 	new CannotGiveToSelfRule(),
